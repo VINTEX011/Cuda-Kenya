@@ -167,6 +167,7 @@ const faqs = [
 
 export default function App() {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({
     service: serviceOptions[0],
     coverage: "Monthly",
@@ -313,6 +314,7 @@ export default function App() {
           </a>
 
           <nav className="nav">
+            <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#standards">Standards</a>
@@ -320,10 +322,55 @@ export default function App() {
             <a href="#contact">Contact</a>
           </nav>
 
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-label="Open navigation menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
           <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
             Request a Quote
           </button>
         </div>
+
+        {menuOpen ? (
+          <div className="mobile-nav">
+            <a href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </a>
+            <a href="#services" onClick={() => setMenuOpen(false)}>
+              Services
+            </a>
+            <a href="#standards" onClick={() => setMenuOpen(false)}>
+              Standards
+            </a>
+            <a href="#pricing" onClick={() => setMenuOpen(false)}>
+              Quotation
+            </a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </a>
+            <button
+              type="button"
+              className="btn btn-primary mobile-quote"
+              onClick={() => {
+                setMenuOpen(false);
+                setQuoteOpen(true);
+              }}
+            >
+              Request a Quote
+            </button>
+          </div>
+        ) : null}
       </header>
 
       <main>
@@ -542,16 +589,16 @@ export default function App() {
           <div className="wrap training-grid">
             <article className="training-copy">
               <p className="eyebrow">Standards & Training</p>
-              <h2>Training, discipline, supervision, and presentation remain central to service quality.</h2>
+              <h2>CUDA builds service quality through training, discipline, supervision, and professional presentation.</h2>
               <p>
-                CUDA's profile emphasizes training, guard readiness, welfare practices, parade standards, and structured service delivery.
-                These are not background details. They are part of the service standard clients experience on the ground.
+                The company profile highlights guard training, operational readiness, welfare practices, parade standards,
+                and structured supervision. These are part of the service standard clients meet on the ground, not just internal notes.
               </p>
               <ul className="feature-list">
-                <li>Structured guard training aligned to professional security practice</li>
-                <li>Strong uniform presentation and field discipline</li>
-                <li>Client-first deployment planning and supervision</li>
-                <li>Support for technical surveys before system quotations</li>
+                <li>Guard training structured around professional security practice</li>
+                <li>Uniform presentation and field discipline maintained on deployment</li>
+                <li>Supervision and planning shaped around client site conditions</li>
+                <li>Technical surveys carried out before system quotation where required</li>
               </ul>
             </article>
 
