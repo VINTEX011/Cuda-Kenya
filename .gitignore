@@ -1,0 +1,11 @@
+node_modules/
+dist/
+
+embedded-images/
+extracted-images/
+pdf-pages/
+
+cuda-profile.txt
+
+.DS_Store
+Thumbs.db
