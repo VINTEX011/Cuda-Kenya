@@ -348,6 +348,22 @@ textarea {
   gap: 20px;
 }
 
+.hero-mobile-media {
+  display: none;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+}
+
+.hero-mobile-media img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .hero-trust-points,
 .hero-metrics {
   display: grid;
@@ -1202,6 +1218,14 @@ textarea {
     gap: 18px;
   }
 
+  .hero-mobile-media {
+    display: block;
+  }
+
+  .hero-intro-card {
+    display: none;
+  }
+
   .value-grid,
   .services-grid,
   .gallery-grid,
@@ -1222,6 +1246,10 @@ textarea {
 
   .hero-media-shell > img {
     height: 260px;
+  }
+
+  .hero-mobile-media img {
+    height: 160px;
   }
 
   .hero-badge-card {

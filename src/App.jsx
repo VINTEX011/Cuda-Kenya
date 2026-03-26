@@ -113,7 +113,7 @@ function BrandLockup({ compact = false, light = false }) {
   return (
     <div className={`brand-lockup${compact ? " compact" : ""}${light ? " light" : ""}`}>
       <div className="brand-lockup-mark">
-        <img src="/media/cuda-logo-clean.png" alt="CUDA logo" />
+        <img src="/media/cuda-logo.png" alt="CUDA logo" />
       </div>
       <div className="brand-lockup-copy">
         <strong>CUDA</strong>
@@ -583,6 +583,10 @@ export default function App() {
               <p className="hero-text">
                 CUDA Security & Logistics Services Ltd delivers guarding, surveillance, executive protection, alarm response, K9 deployment, courier support, and cash management through disciplined personnel, structured supervision, and practical security planning.
               </p>
+
+              <div className="hero-mobile-media">
+                <img src="/media/security-officer.png" alt="CUDA security officer" />
+              </div>
 
               <div className="hero-trust-points">
                 <span>Professional guarding and patrol deployment</span>
