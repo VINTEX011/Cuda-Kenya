@@ -143,11 +143,12 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   width: 64px;
   height: 64px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.94);
-  padding: 6px;
+  padding: 4px;
   box-shadow: var(--shadow);
 }
 
@@ -155,13 +156,15 @@ textarea {
   width: 54px;
   height: 54px;
   border-radius: 18px;
-  padding: 5px;
+  padding: 3px;
 }
 
 .brand-lockup-mark img {
-  width: 100%;
-  height: 100%;
+  width: 116%;
+  height: 116%;
   object-fit: contain;
+  object-position: center 34%;
+  transform: translateY(-2px);
 }
 
 .brand-lockup-copy {
@@ -355,13 +358,14 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow);
+  width: 100%;
 }
 
 .hero-mobile-media img {
   width: 100%;
   height: 190px;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 18%;
 }
 
 .hero-trust-points,
@@ -1220,6 +1224,7 @@ textarea {
 
   .hero-mobile-media {
     display: block;
+    max-width: 100%;
   }
 
   .hero-intro-card {
@@ -1249,7 +1254,8 @@ textarea {
   }
 
   .hero-mobile-media img {
-    height: 160px;
+    height: 150px;
+    object-position: center 14%;
   }
 
   .hero-badge-card {
@@ -1272,7 +1278,7 @@ textarea {
   .brand-lockup-mark {
     width: 54px;
     height: 54px;
-    font-size: 1.45rem;
+    padding: 3px;
   }
 
   .section,
