@@ -2,89 +2,37 @@ import { useState } from "react";
 
 const serviceHighlights = [
   {
-    title: "Physical Security",
-    label: "Guarding Services",
-    copy:
-      "Manned guarding, access control, patrol services, and event security for corporate, residential, institutional, and public environments.",
-    image: "/media/guard-team.jpg",
+    title: "Guarding Services",
+    copy: "Manned guarding, patrols, access control, and event security for corporate, residential, institutional, and public environments.",
   },
   {
     title: "Electronic Security",
-    label: "Technical Security",
-    copy:
-      "CCTV surveillance, intruder alarms, perimeter security, and access control systems planned around site requirements and operational risk.",
-    image: "/media/security-officer.png",
+    copy: "CCTV surveillance, intruder alarms, access control, and perimeter systems planned around site conditions and operational risk.",
   },
   {
     title: "Executive Protection",
-    label: "Specialized Protection",
-    copy:
-      "VIP or VVIP protection, close protection support, and professional officer deployment for sensitive movement and high-profile assignments.",
-    image: "/media/bodyguard.jpg",
+    copy: "VIP or VVIP protection, bodyguards, and specialist officer support for sensitive movement and high-profile assignments.",
   },
   {
-    title: "Secure Logistics",
-    label: "Logistics Support",
-    copy:
-      "Courier services, cash management, and controlled movement support for clients who require reliability, discretion, and accountability.",
-    image: "/media/cash-management.jpg",
+    title: "Logistics Support",
+    copy: "Courier services, cash management, alarm response, and secure movement support delivered with accountability and reliability.",
   },
 ];
 
-const specialistUnits = [
-  {
-    title: "K9 Services",
-    copy: "Dog-and-handler deployment for deterrence, patrol reinforcement, crowd control support, and sensitive site coverage.",
-    image: "/media/k9-service.jpg",
-  },
-  {
-    title: "Alarm Response",
-    copy: "Response support structured for Nairobi, Mombasa, Kisumu, and upcountry coverage in line with the quotation profile.",
-    image: "/media/guard-team.jpg",
-  },
-  {
-    title: "Bodyguards & Officers",
-    copy: "Bodyguards, undercover officers, senior guards, CCTV controllers, and armed or unarmed officers assigned to operational need.",
-    image: "/media/security-officer.png",
-  },
+const valuePoints = [
+  "Reliability through disciplined service delivery",
+  "Integrity in conduct, supervision, and client engagement",
+  "Innovation through practical security systems and planning",
+  "Customer focus built around client needs and operating conditions",
 ];
 
-const values = [
-  {
-    title: "Reliability",
-    stat: "Dependable",
-    copy: "Consistent security support built around readiness, supervision, and disciplined field execution.",
-  },
-  {
-    title: "Integrity",
-    stat: "Trusted",
-    copy: "Transparent engagement, ethical conduct, and responsible service delivery across every client assignment.",
-  },
-  {
-    title: "Innovation",
-    stat: "Adaptive",
-    copy: "Modern security thinking that combines field presence with technical systems and practical risk planning.",
-  },
-  {
-    title: "Customer Focus",
-    stat: "Responsive",
-    copy: "Services shaped around client needs, environment, urgency, and long-term working relationships.",
-  },
-];
-
-const proofItems = [
-  {
-    title: "Structured Training",
-    copy: "CUDA's profile highlights formal guard training, discipline, parade standards, and operational readiness.",
-  },
-  {
-    title: "Survey-Led Technical Work",
-    copy: "CCTV, intruder alarms, access control, and electric fencing remain tied to site survey for more accurate delivery and pricing.",
-  },
-  {
-    title: "Operational Coverage",
-    copy: "The quotation profile references Nairobi, Mombasa, Kisumu, and upcountry support, reinforcing broader deployment capability.",
-  },
+const galleryItems = [
+  { title: "Guarding Team", image: "/media/guard-team.jpg" },
+  { title: "Security Officer", image: "/media/security-officer.png" },
+  { title: "K9 Services", image: "/media/k9-service.jpg" },
+  { title: "Bodyguard Support", image: "/media/bodyguard.jpg" },
+  { title: "Cash Management", image: "/media/cash-management.jpg" },
+  { title: "Communications", image: "/media/radio-hero.jpg" },
 ];
 
 const quotationRates = [
@@ -131,42 +79,12 @@ const serviceOptions = [
   "Courier Services",
   "Cash Management",
   "Access Control & Perimeter Security",
-  "Cybersecurity Support",
   "Custom Site Survey",
-];
-
-const trustPoints = [
-  "Comprehensive Security Solutions, Trusted & True.",
-  "Professional guarding, electronic security, and executive protection",
-  "Survey-led technical quotation for systems and perimeter solutions",
-  "Corporate, residential, institutional, and event deployment support",
-];
-
-const faqs = [
-  {
-    question: "How does CUDA issue quotations?",
-    answer:
-      "CUDA quotes monthly, daily, hourly, weekend, and event-based coverage. Technical installations are quoted after survey by the technical team.",
-  },
-  {
-    question: "Which specialist services are available?",
-    answer:
-      "CUDA supports VIP or VVIP protection, K9 deployment, bodyguards, undercover officers, CCTV controllers, and armed or unarmed officer cover.",
-  },
-  {
-    question: "Do technical security projects require a survey?",
-    answer:
-      "Yes. CCTV, intruder alarms, access control, and electric fencing should be surveyed before final quotation and deployment planning.",
-  },
-  {
-    question: "Where is CUDA located?",
-    answer:
-      "CUDA is based at Nine Planets Apartment, Suite Plot 4, Kabarnet Gardens, Off Ngong Road, Opposite The Sudan Embassy, Nairobi.",
-  },
 ];
 
 export default function App() {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({
     service: serviceOptions[0],
@@ -290,350 +208,26 @@ export default function App() {
         </div>
       ) : null}
 
-      <div className="topbar">
-        <div className="wrap topbar-inner">
-          <div className="contact-strip">
-            <span>info@cudasls.co.ke</span>
-            <span>+254 725 766 457</span>
-            <span>+254 705 150 605</span>
-          </div>
-          <div className="topbar-address">
-            Nine Planets Apartment, Suite Plot 4, Kabarnet Gardens, Off Ngong Road, Nairobi
-          </div>
-        </div>
-      </div>
-
-      <header className="header">
-        <div className="wrap header-inner">
-          <a className="brand" href="#home">
-            <img src="/media/cuda-logo.png" alt="CUDA logo" />
-            <div>
-              <strong>CUDA</strong>
-              <span>Security & Logistics Services Ltd</span>
-            </div>
-          </a>
-
-          <nav className="nav">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#standards">Standards</a>
-            <a href="#pricing">Quotation</a>
-            <a href="#contact">Contact</a>
-          </nav>
-
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-label="Open navigation menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((current) => !current)}
+      {pricingOpen ? (
+        <div className="modal-backdrop" onClick={() => setPricingOpen(false)}>
+          <div
+            className="quote-modal pricing-modal"
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pricing-title"
           >
-            <span />
-            <span />
-            <span />
-          </button>
-
-          <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
-            Request a Quote
-          </button>
-        </div>
-
-        {menuOpen ? (
-          <div className="mobile-nav">
-            <a href="#home" onClick={() => setMenuOpen(false)}>
-              Home
-            </a>
-            <a href="#about" onClick={() => setMenuOpen(false)}>
-              About
-            </a>
-            <a href="#services" onClick={() => setMenuOpen(false)}>
-              Services
-            </a>
-            <a href="#standards" onClick={() => setMenuOpen(false)}>
-              Standards
-            </a>
-            <a href="#pricing" onClick={() => setMenuOpen(false)}>
-              Quotation
-            </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </a>
-            <button
-              type="button"
-              className="btn btn-primary mobile-quote"
-              onClick={() => {
-                setMenuOpen(false);
-                setQuoteOpen(true);
-              }}
-            >
-              Request a Quote
-            </button>
-          </div>
-        ) : null}
-      </header>
-
-      <main>
-        <section className="hero" id="home">
-          <div className="hero-pattern" />
-          <div className="wrap hero-grid">
-            <div className="hero-copy">
-              <p className="eyebrow">CUDA Security & Logistics Services Ltd</p>
-              <h1>Comprehensive Security Solutions, Trusted & True.</h1>
-              <p className="hero-text">
-                CUDA provides professional guarding, electronic security, executive protection, K9 support, alarm response,
-                courier services, and cash management for clients who require disciplined and dependable service.
-              </p>
-              <div className="button-row">
-                <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
-                  Request a Quote
-                </button>
-                <a className="btn btn-secondary" href="#services">
-                  View Services
-                </a>
-              </div>
-
-              <div className="trust-grid">
-                {trustPoints.map((item) => (
-                  <div key={item} className="trust-card">
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="hero-visual hero-visual-pro">
-              <div className="hero-card hero-card-team">
-                <img src="/media/guard-team.jpg" alt="CUDA guard team" />
-              </div>
-
-              <div className="hero-visual-bottom">
-                <div className="hero-card hero-card-portrait">
-                  <img src="/media/security-officer.png" alt="CUDA security officer" />
-                </div>
-
-                <div className="hero-info-panel">
-                  <p className="hero-info-label">Operational Focus</p>
-                  <h3>Professional guarding, specialist protection, and survey-led technical security support.</h3>
-                  <ul>
-                    <li>Guarding and patrol services</li>
-                    <li>Electronic security systems</li>
-                    <li>VIP, K9, and alarm response support</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="about">
-          <div className="wrap intro-grid">
-            <article className="intro-panel dark">
-              <p className="eyebrow">Overview</p>
-              <h2>Professional security support built around discipline, integrity, and client confidence.</h2>
+            <div className="modal-side">
+              <img className="modal-logo" src="/media/cuda-logo.png" alt="CUDA Security and Logistics logo" />
+              <p className="eyebrow">Quotation Guide</p>
+              <h2 id="pricing-title">Current guarding and response rates from the company quotation profile.</h2>
               <p>
-                CUDA Security and Logistics Services Ltd is a provider of comprehensive security solutions dedicated to
-                safeguarding individuals, businesses, institutions, and assets through professionalism, innovation, and customer focus.
-              </p>
-              <div className="overview-panel-media">
-                <img src="/media/guard-team.jpg" alt="CUDA guard team" />
-                <div className="overview-panel-caption">
-                  <strong>Field-ready professional teams</strong>
-                  <span>Guarding, supervision, and operational presence delivered with discipline and consistency.</span>
-                </div>
-              </div>
-            </article>
-
-            <article className="intro-panel brand-panel">
-              <div className="brand-panel-top">
-                <img className="brand-panel-logo" src="/media/cuda-logo.png" alt="CUDA logo" />
-                <div>
-                  <p className="eyebrow">Trusted Profile</p>
-                  <h3>Security and logistics support structured for real operational environments.</h3>
-                </div>
-              </div>
-
-              <div className="brand-panel-grid">
-                <div className="brand-point">
-                  <strong>Location</strong>
-                  <span>Ngong Road, Nairobi</span>
-                </div>
-                <div className="brand-point">
-                  <strong>Response</strong>
-                  <span>Nairobi, Mombasa, Kisumu, Upcountry</span>
-                </div>
-                <div className="brand-point">
-                  <strong>Coverage</strong>
-                  <span>Guarding, systems, protection, logistics</span>
-                </div>
-                <div className="brand-point">
-                  <strong>Contact</strong>
-                  <span>info@cudasls.co.ke</span>
-                </div>
-              </div>
-
-              <div className="brand-panel-media">
-                <div className="brand-panel-summary">
-                  <div className="summary-row">
-                    <strong>Company</strong>
-                    <span>CUDA Security & Logistics Services Ltd</span>
-                  </div>
-                  <div className="summary-row">
-                    <strong>Coverage</strong>
-                    <span>Guarding, electronic security, executive protection, K9, alarm response, courier, and cash management</span>
-                  </div>
-                  <div className="summary-row">
-                    <strong>Service Areas</strong>
-                    <span>Nairobi, Mombasa, Kisumu, and upcountry support</span>
-                  </div>
-                  <div className="summary-row">
-                    <strong>Technical Work</strong>
-                    <span>Survey-led quotation for CCTV, intruder alarms, access control, and electric fencing</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section className="section section-tight">
-          <div className="wrap two-column">
-            <div className="about-copy">
-              <p className="eyebrow">Mission</p>
-              <h2>Create a secure environment for every client through responsive service and professional execution.</h2>
-              <p className="section-copy">
-                CUDA's mission is to deliver dependable security solutions with discipline, operational clarity, and a service approach that supports long-term trust.
-              </p>
-              <div className="about-note">
-                <strong>What defines CUDA:</strong>
-                <span>
-                  A practical mix of trained personnel, technical security support, and client-led deployment planning.
-                </span>
-              </div>
-            </div>
-
-            <div className="value-grid">
-              {values.map((value) => (
-                <article className="value-card" key={value.title}>
-                  <span className="value-stat">{value.stat}</span>
-                  <h3>{value.title}</h3>
-                  <p>{value.copy}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section services-section" id="services">
-          <div className="wrap">
-            <p className="eyebrow">Services</p>
-            <div className="section-heading">
-              <h2>Integrated services arranged for faster decision-making and stronger client confidence.</h2>
-              <p>CUDA's service structure combines manpower, specialist protection, and technical systems under one coordinated offering.</p>
-            </div>
-
-            <div className="services-grid">
-              {serviceHighlights.map((service) => (
-                <article className="service-card" key={service.title}>
-                  <img src={service.image} alt={service.title} />
-                  <div className="service-card-body">
-                    <span className="service-label">{service.label}</span>
-                    <h3>{service.title}</h3>
-                    <p>{service.copy}</p>
-                    <div className="service-link">Tailored deployment planning</div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="coverage-cloud">
-              <span>Manned Guarding</span>
-              <span>Access Control</span>
-              <span>Patrol Services</span>
-              <span>Event Security</span>
-              <span>CCTV Surveillance</span>
-              <span>Intruder Alarm Systems</span>
-              <span>Perimeter Security</span>
-              <span>VIP Protection</span>
-              <span>K9 Services</span>
-              <span>Alarm Response</span>
-              <span>Courier Services</span>
-              <span>Cash Management</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="section specialist-section">
-          <div className="wrap">
-            <p className="eyebrow">Specialist Services</p>
-            <div className="section-heading">
-              <h2>Specialist protection and response services presented with clear operational focus.</h2>
-              <p>CUDA also supports assignments that require closer control, stronger visibility, or specialist deployment.</p>
-            </div>
-
-            <div className="specialist-grid">
-              {specialistUnits.map((item) => (
-                <article className="specialist-card" key={item.title}>
-                  <img src={item.image} alt={item.title} />
-                  <div className="specialist-card-body">
-                    <h3>{item.title}</h3>
-                    <p>{item.copy}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section training-section" id="standards">
-          <div className="wrap training-grid">
-            <article className="training-copy">
-              <p className="eyebrow">Standards & Training</p>
-              <h2>CUDA builds service quality through training, discipline, supervision, and professional presentation.</h2>
-              <p>
-                The company profile highlights guard training, operational readiness, welfare practices, parade standards,
-                and structured supervision. These are part of the service standard clients meet on the ground, not just internal notes.
-              </p>
-              <ul className="feature-list">
-                <li>Guard training structured around professional security practice</li>
-                <li>Uniform presentation and field discipline maintained on deployment</li>
-                <li>Supervision and planning shaped around client site conditions</li>
-                <li>Technical surveys carried out before system quotation where required</li>
-              </ul>
-            </article>
-
-            <article className="training-visual">
-              <img src="/media/uniform-team.png" alt="CUDA guards in formal uniform" />
-            </article>
-          </div>
-        </section>
-
-        <section className="section proof-section">
-          <div className="wrap">
-            <p className="eyebrow">Why Choose CUDA</p>
-            <div className="proof-grid">
-              {proofItems.map((item) => (
-                <article className="proof-card" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section pricing-section" id="pricing">
-          <div className="wrap">
-            <p className="eyebrow">Quotation Guide</p>
-            <div className="section-heading">
-              <h2>Quotation information presented in a clear and structured format.</h2>
-              <p>
-                Rates below are drawn from the company quotation page. Technical solutions such as CCTV, alarms, access
-                control, and electric fencing should continue to be quoted after a site survey by the technical team.
+                Technical services such as CCTV, intruder alarms, access control, and electric fencing should still be
+                quoted after site survey by the technical team.
               </p>
             </div>
 
-            <div className="pricing-layout">
+            <div className="modal-form pricing-modal-body">
               <div className="pricing-table-wrap">
                 <table className="pricing-table">
                   <thead>
@@ -676,20 +270,244 @@ export default function App() {
                   </article>
                 ))}
               </div>
+
+              <div className="button-row">
+                <button type="button" className="btn btn-ghost" onClick={() => setPricingOpen(false)}>
+                  Close Rates
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <div className="topbar">
+        <div className="wrap topbar-inner">
+          <div className="contact-strip">
+            <span>info@cudasls.co.ke</span>
+            <span>+254 725 766 457</span>
+            <span>+254 705 150 605</span>
+          </div>
+          <div className="topbar-address">
+            Nine Planets Apartment, Suite Plot 4, Kabarnet Gardens, Off Ngong Road, Nairobi
+          </div>
+        </div>
+      </div>
+
+      <header className="header">
+        <div className="wrap header-inner">
+          <a className="brand" href="#home">
+            <img src="/media/cuda-logo.png" alt="CUDA logo" />
+            <div>
+              <strong>CUDA</strong>
+              <span>Security & Logistics Services Ltd</span>
+            </div>
+          </a>
+
+          <nav className="nav">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <button type="button" className="menu-toggle" onClick={() => setMenuOpen((current) => !current)} aria-label="Open navigation menu">
+            <span />
+            <span />
+            <span />
+          </button>
+
+          <button className="btn btn-primary header-quote" onClick={() => setQuoteOpen(true)}>
+            Request a Quote
+          </button>
+        </div>
+
+        {menuOpen ? (
+          <div className="mobile-nav">
+            <a href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </a>
+            <a href="#services" onClick={() => setMenuOpen(false)}>
+              Services
+            </a>
+            <a href="#gallery" onClick={() => setMenuOpen(false)}>
+              Gallery
+            </a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </a>
+            <button
+              type="button"
+              className="btn btn-primary mobile-quote"
+              onClick={() => {
+                setMenuOpen(false);
+                setQuoteOpen(true);
+              }}
+            >
+              Request a Quote
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary mobile-quote"
+              onClick={() => {
+                setMenuOpen(false);
+                setPricingOpen(true);
+              }}
+            >
+              View Quotation
+            </button>
+          </div>
+        ) : null}
+      </header>
+
+      <main>
+        <section className="hero" id="home">
+          <div className="hero-pattern" />
+          <div className="wrap hero-grid">
+            <div className="hero-copy">
+              <div className="hero-brand-block">
+                <img src="/media/cuda-logo.png" alt="CUDA logo" />
+                <div>
+                  <p className="eyebrow">Who We Are</p>
+                  <h1>Comprehensive Security Solutions, Trusted & True.</h1>
+                </div>
+              </div>
+
+              <p className="hero-text">
+                CUDA Security & Logistics Services Ltd provides professional guarding, electronic security, executive protection,
+                K9 support, alarm response, courier services, and cash management for clients who need dependable service and clear supervision.
+              </p>
+
+              <div className="button-row">
+                <a className="btn btn-secondary" href="#services">
+                  Explore Services
+                </a>
+                <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
+                  Request a Quote
+                </button>
+                <button className="btn btn-secondary" onClick={() => setPricingOpen(true)}>
+                  View Quotation
+                </button>
+              </div>
+            </div>
+
+            <div className="hero-intro-card">
+              <img src="/media/security-officer.png" alt="CUDA security officer" />
+              <div className="hero-intro-copy">
+                <strong>Professional security and logistics support for corporate, residential, institutional, and event environments.</strong>
+                <span>Based in Nairobi with response and support planning extending to Mombasa, Kisumu, and upcountry assignments.</span>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section faq-section">
-          <div className="wrap">
-            <p className="eyebrow">Frequently Asked Questions</p>
-            <div className="faq-grid">
-              {faqs.map((item) => (
-                <article className="faq-card" key={item.question}>
-                  <h3>{item.question}</h3>
-                  <p>{item.answer}</p>
+        <section className="section about-section" id="about">
+          <div className="wrap two-column">
+            <div className="about-copy">
+              <p className="eyebrow">About CUDA</p>
+              <h2>Security support built around discipline, integrity, innovation, and customer focus.</h2>
+              <p className="section-copy">
+                CUDA is a provider of comprehensive security solutions dedicated to safeguarding individuals, businesses,
+                institutions, and assets through professionalism, operational readiness, and client-centered service delivery.
+              </p>
+              <div className="about-note">
+                <strong>Mission</strong>
+                <span>Create secure environments for clients through responsive service, disciplined personnel, and practical security planning.</span>
+              </div>
+            </div>
+
+            <div className="value-grid">
+              {valuePoints.map((item) => (
+                <article className="value-card" key={item}>
+                  <h3>{item}</h3>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section services-section" id="services">
+          <div className="wrap">
+            <p className="eyebrow">Services</p>
+            <div className="section-heading">
+              <h2>Core service areas organized for easier understanding and faster decision-making.</h2>
+              <p>CUDA combines manpower, specialist protection, and technical systems in one coordinated service structure.</p>
+            </div>
+
+            <div className="services-grid">
+              {serviceHighlights.map((service) => (
+                <article className="service-card" key={service.title}>
+                  <div className="service-card-body">
+                    <span className="service-label">{service.label}</span>
+                    <h3>{service.title}</h3>
+                    <p>{service.copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section gallery-section" id="gallery">
+          <div className="wrap">
+            <p className="eyebrow">Gallery</p>
+            <div className="section-heading">
+              <h2>Selected profile visuals showing guarding, protection, communications, and specialist support.</h2>
+              <p>This section keeps the operational images together in one place instead of scattering them across every content block.</p>
+            </div>
+
+            <div className="gallery-grid">
+              {galleryItems.map((item) => (
+                <figure className="gallery-card" key={item.title}>
+                  <img src={item.image} alt={item.title} />
+                  <figcaption>{item.title}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section standards-section">
+          <div className="wrap two-column">
+            <article className="training-copy">
+              <p className="eyebrow">Standards & Training</p>
+              <h2>Service quality is supported by training, supervision, discipline, and professional presentation.</h2>
+              <p>
+                CUDA's company profile highlights guard training, readiness, welfare practice, parade standards, and structured supervision.
+                These are part of the service standard clients experience on site.
+              </p>
+              <ul className="feature-list">
+                <li>Guard training aligned to professional security practice</li>
+                <li>Uniform presentation and field discipline on deployment</li>
+                <li>Supervision shaped around client site conditions</li>
+                <li>Technical surveys before quotation where required</li>
+              </ul>
+            </article>
+
+            <article className="training-visual">
+              <img src="/media/uniform-team.png" alt="CUDA guards in formal uniform" />
+            </article>
+          </div>
+        </section>
+
+        <section className="section quote-link-section">
+          <div className="wrap cta-panel">
+            <div>
+              <p className="eyebrow">Quotation Access</p>
+              <h2>Pricing and alarm response rates can be opened separately to keep the homepage cleaner.</h2>
+              <p>Use the quotation button to view current guarding rates and response pricing without cluttering the main page.</p>
+            </div>
+            <div className="cta-actions">
+              <button className="btn btn-primary" onClick={() => setPricingOpen(true)}>
+                Open Quotation Rates
+              </button>
+              <button className="btn btn-secondary" onClick={() => setQuoteOpen(true)}>
+                Request a Quote
+              </button>
             </div>
           </div>
         </section>
@@ -717,17 +535,6 @@ export default function App() {
           </div>
 
           <div>
-            <h3>Quotation Basis</h3>
-            <ul>
-              <li>Monthly rates</li>
-              <li>Daily rates</li>
-              <li>Hourly rates</li>
-              <li>Weekend and event coverage</li>
-              <li>Survey-based technical pricing</li>
-            </ul>
-          </div>
-
-          <div>
             <h3>Contact Information</h3>
             <ul className="contact-list">
               <li>Nine Planets Apartment, Suite Plot 4, Kabarnet Gardens, Off Ngong Road, Opposite The Sudan Embassy</li>
@@ -736,21 +543,23 @@ export default function App() {
                 <a href="mailto:info@cudasls.co.ke">info@cudasls.co.ke</a>
               </li>
               <li>
-                <a href="https://www.cudasls.co.ke" target="_blank" rel="noreferrer">
-                  www.cudasls.co.ke
-                </a>
-              </li>
-              <li>
                 <a href="tel:+254725766457">+254 725 766 457</a>
               </li>
               <li>
                 <a href="tel:+254705150605">+254 705 150 605</a>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h3>Quick Actions</h3>
             <div className="footer-actions">
-              <a className="btn btn-primary" href="mailto:info@cudasls.co.ke">
-                Email CUDA
-              </a>
+              <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
+                Request a Quote
+              </button>
+              <button className="btn btn-secondary footer-whatsapp" onClick={() => setPricingOpen(true)}>
+                View Quotation
+              </button>
               <a className="btn btn-secondary footer-whatsapp" href="https://wa.me/254725766457" target="_blank" rel="noreferrer">
                 WhatsApp Team
               </a>
