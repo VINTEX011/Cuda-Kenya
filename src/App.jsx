@@ -527,73 +527,48 @@ export default function App() {
         </div>
 
         {menuOpen ? (
-          <div className="mobile-drawer-backdrop" onClick={() => setMenuOpen(false)}>
-            <div className="mobile-nav mobile-nav-open" onClick={(event) => event.stopPropagation()}>
-              <div className="mobile-nav-top">
-                <BrandLockup compact />
-                <button type="button" className="menu-close" onClick={() => setMenuOpen(false)} aria-label="Close navigation menu">
-                  <span />
-                  <span />
-                </button>
-              </div>
-
-              <div className="mobile-nav-actions">
-                <button
-                  type="button"
-                  className="btn btn-primary mobile-quote"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setQuoteOpen(true);
-                  }}
-                >
-                  Request a Quote
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary mobile-quote"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setPricingOpen(true);
-                  }}
-                >
-                  View Quotation
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary mobile-quote"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setCareersOpen(true);
-                  }}
-                >
-                  Careers
-                </button>
-              </div>
-
-              <div className="mobile-nav-links">
-                <a href="#home" onClick={() => setMenuOpen(false)}>
-                  Home
-                </a>
-                <a href="#about" onClick={() => setMenuOpen(false)}>
-                  About
-                </a>
-                <a href="#services" onClick={() => setMenuOpen(false)}>
-                  Services
-                </a>
-                <a href="#standards" onClick={() => setMenuOpen(false)}>
-                  Standards
-                </a>
-                <a href="#gallery" onClick={() => setMenuOpen(false)}>
-                  Gallery
-                </a>
-                <a href="#careers" onClick={() => setMenuOpen(false)}>
-                  Careers
-                </a>
-                <a href="#contact" onClick={() => setMenuOpen(false)}>
-                  Contact
-                </a>
-              </div>
-            </div>
+          <div className="mobile-nav mobile-nav-open">
+            <a href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </a>
+            <a href="#services" onClick={() => setMenuOpen(false)}>
+              Services
+            </a>
+            <a href="#standards" onClick={() => setMenuOpen(false)}>
+              Standards
+            </a>
+            <a href="#gallery" onClick={() => setMenuOpen(false)}>
+              Gallery
+            </a>
+            <a href="#careers" onClick={() => setMenuOpen(false)}>
+              Careers
+            </a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </a>
+            <button
+              type="button"
+              className="btn btn-primary mobile-quote"
+              onClick={() => {
+                setMenuOpen(false);
+                setQuoteOpen(true);
+              }}
+            >
+              Request a Quote
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary mobile-quote"
+              onClick={() => {
+                setMenuOpen(false);
+                setPricingOpen(true);
+              }}
+            >
+              View Quotation
+            </button>
           </div>
         ) : null}
       </header>
