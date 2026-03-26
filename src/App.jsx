@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const serviceHighlights = [
   {
+    label: "Core Security",
     title: "Guarding Services",
     copy: "Manned guarding, patrols, access control, and event security for corporate, residential, institutional, and public environments.",
   },
   {
+    label: "Technology",
     title: "Electronic Security",
     copy: "CCTV surveillance, intruder alarms, access control, and perimeter systems planned around site conditions and operational risk.",
   },
   {
+    label: "Executive Detail",
     title: "Executive Protection",
     copy: "VIP or VVIP protection, bodyguards, and specialist officer support for sensitive movement and high-profile assignments.",
   },
   {
+    label: "Logistics",
     title: "Logistics Support",
     copy: "Courier services, cash management, alarm response, and secure movement support delivered with accountability and reliability.",
   },
@@ -24,6 +28,29 @@ const valuePoints = [
   "Integrity in conduct, supervision, and client engagement",
   "Innovation through practical security systems and planning",
   "Customer focus built around client needs and operating conditions",
+];
+
+const specialistUnits = [
+  "K9 deployment for high-risk screening and deterrence",
+  "Alarm response support for homes, offices, and institutions",
+  "Bodyguard and VIP movement support for sensitive assignments",
+  "Courier and secure movement support for accountable delivery",
+];
+
+const trustMetrics = [
+  { value: "24/7", label: "Operational readiness" },
+  { value: "Nairobi", label: "Head office and command base" },
+  { value: "Multi-service", label: "Integrated manpower and technical support" },
+  { value: "Survey-led", label: "Technical pricing for CCTV and access control" },
+];
+
+const careerRequirements = [
+  "Valid national ID or other recognised identification",
+  "Certificate of good conduct or readiness to provide one",
+  "Recent CV with contact details and work history",
+  "Academic and professional training certificates where applicable",
+  "Physical fitness, discipline, and professional presentation",
+  "Relevant experience for supervisory, technical, or specialist roles",
 ];
 
 const galleryItems = [
@@ -82,10 +109,26 @@ const serviceOptions = [
   "Custom Site Survey",
 ];
 
+function BrandLockup({ compact = false, light = false }) {
+  return (
+    <div className={`brand-lockup${compact ? " compact" : ""}${light ? " light" : ""}`}>
+      <div className="brand-lockup-mark">
+        <img src="/media/cuda-logo-clean.png" alt="CUDA logo" />
+      </div>
+      <div className="brand-lockup-copy">
+        <strong>CUDA</strong>
+        <span>Security & Logistics Services Ltd</span>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [pricingOpen, setPricingOpen] = useState(false);
+  const [careersOpen, setCareersOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [heroReady, setHeroReady] = useState(false);
   const [form, setForm] = useState({
     service: serviceOptions[0],
     coverage: "Monthly",
@@ -94,10 +137,53 @@ export default function App() {
     contact: "",
     details: "",
   });
+  const [careerForm, setCareerForm] = useState({
+    role: "Security Guard",
+    name: "",
+    phone: "",
+    email: "",
+    location: "",
+    experience: "",
+    details: "",
+  });
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setHeroReady(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    const items = document.querySelectorAll(".gallery-card");
+
+    if (!items.length) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    items.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
 
   function handleChange(event) {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+  }
+
+  function handleCareerChange(event) {
+    const { name, value } = event.target;
+    setCareerForm((current) => ({ ...current, [name]: value }));
   }
 
   function handleQuoteSubmit(event) {
@@ -118,19 +204,40 @@ export default function App() {
     window.location.href = `mailto:info@cudasls.co.ke?subject=${subject}&body=${body}`;
   }
 
+  function handleCareerSubmit(event) {
+    event.preventDefault();
+    const subject = encodeURIComponent(`Job Application: ${careerForm.role}`);
+    const body = encodeURIComponent(
+      [
+        `Role applying for: ${careerForm.role}`,
+        `Full name: ${careerForm.name}`,
+        `Phone: ${careerForm.phone}`,
+        `Email: ${careerForm.email}`,
+        `Location: ${careerForm.location}`,
+        `Experience level: ${careerForm.experience}`,
+        "",
+        "Applicant details:",
+        careerForm.details,
+        "",
+        "Kindly attach CV and supporting documents in the email response.",
+      ].join("\n"),
+    );
+    window.location.href = `mailto:info@cudasls.co.ke?subject=${subject}&body=${body}`;
+  }
+
   return (
     <div className="site-shell">
       {quoteOpen ? (
         <div className="modal-backdrop" onClick={() => setQuoteOpen(false)}>
           <div
-            className="quote-modal"
+            className="quote-modal modal-enter"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="quote-title"
           >
             <div className="modal-side">
-              <img className="modal-logo" src="/media/cuda-logo.png" alt="CUDA Security and Logistics logo" />
+              <BrandLockup light />
               <p className="eyebrow">Quotation Request</p>
               <h2 id="quote-title">Tell CUDA what you need and our team will recommend the right deployment.</h2>
               <p>
@@ -211,14 +318,14 @@ export default function App() {
       {pricingOpen ? (
         <div className="modal-backdrop" onClick={() => setPricingOpen(false)}>
           <div
-            className="quote-modal pricing-modal"
+            className="quote-modal pricing-modal modal-enter"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="pricing-title"
           >
             <div className="modal-side">
-              <img className="modal-logo" src="/media/cuda-logo.png" alt="CUDA Security and Logistics logo" />
+              <BrandLockup light />
               <p className="eyebrow">Quotation Guide</p>
               <h2 id="pricing-title">Current guarding and response rates from the company quotation profile.</h2>
               <p>
@@ -281,6 +388,104 @@ export default function App() {
         </div>
       ) : null}
 
+      {careersOpen ? (
+        <div className="modal-backdrop" onClick={() => setCareersOpen(false)}>
+          <div
+            className="quote-modal modal-enter"
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="careers-title"
+          >
+            <div className="modal-side">
+              <BrandLockup light />
+              <p className="eyebrow">Careers</p>
+              <h2 id="careers-title">Apply for opportunities in guarding, technical security, logistics, and specialist support.</h2>
+              <p>
+                CUDA can receive applications for current openings and general recruitment interest. Candidates can submit basic details here and then send CVs or supporting documents by email.
+              </p>
+              <div className="requirements-box">
+                <strong>Basic application requirements</strong>
+                <ul className="feature-list">
+                  {careerRequirements.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <ul className="modal-points">
+                <li>Formal application intake</li>
+                <li>Suitable for guards, drivers, technicians, handlers, and support staff</li>
+                <li>CV and certificates can follow by email or WhatsApp guidance</li>
+              </ul>
+            </div>
+
+            <form className="modal-form" onSubmit={handleCareerSubmit}>
+              <label>
+                Position applied for
+                <select name="role" value={careerForm.role} onChange={handleCareerChange}>
+                  <option>Security Guard</option>
+                  <option>Senior Guard</option>
+                  <option>Bodyguard / VIP Protection Officer</option>
+                  <option>CCTV / Alarm Technician</option>
+                  <option>K9 Handler</option>
+                  <option>Courier / Logistics Support</option>
+                  <option>General Recruitment</option>
+                </select>
+              </label>
+
+              <div className="form-grid">
+                <label>
+                  Full name
+                  <input name="name" value={careerForm.name} onChange={handleCareerChange} placeholder="Applicant name" />
+                </label>
+                <label>
+                  Phone number
+                  <input name="phone" value={careerForm.phone} onChange={handleCareerChange} placeholder="+254..." />
+                </label>
+              </div>
+
+              <div className="form-grid">
+                <label>
+                  Email address
+                  <input name="email" value={careerForm.email} onChange={handleCareerChange} placeholder="name@example.com" />
+                </label>
+                <label>
+                  Current location
+                  <input name="location" value={careerForm.location} onChange={handleCareerChange} placeholder="Nairobi, Kisumu..." />
+                </label>
+              </div>
+
+              <label>
+                Experience level
+                <input name="experience" value={careerForm.experience} onChange={handleCareerChange} placeholder="Years of experience or key background" />
+              </label>
+
+              <label>
+                Application details
+                <textarea
+                  name="details"
+                  value={careerForm.details}
+                  onChange={handleCareerChange}
+                  placeholder="Briefly describe your experience, training, licences, security background, or the type of role you are seeking."
+                />
+              </label>
+
+              <div className="button-row">
+                <button type="submit" className="btn btn-primary">
+                  Submit Application
+                </button>
+                <a className="btn btn-secondary" href="https://wa.me/254725766457" target="_blank" rel="noreferrer">
+                  WhatsApp Careers
+                </a>
+                <button type="button" className="btn btn-ghost" onClick={() => setCareersOpen(false)}>
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : null}
+
       <div className="topbar">
         <div className="wrap topbar-inner">
           <div className="contact-strip">
@@ -297,18 +502,16 @@ export default function App() {
       <header className="header">
         <div className="wrap header-inner">
           <a className="brand" href="#home">
-            <img src="/media/cuda-logo.png" alt="CUDA logo" />
-            <div>
-              <strong>CUDA</strong>
-              <span>Security & Logistics Services Ltd</span>
-            </div>
+            <BrandLockup compact />
           </a>
 
           <nav className="nav">
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#services">Services</a>
+            <a href="#standards">Standards</a>
             <a href="#gallery">Gallery</a>
+            <a href="#careers">Careers</a>
             <a href="#contact">Contact</a>
           </nav>
 
@@ -324,7 +527,7 @@ export default function App() {
         </div>
 
         {menuOpen ? (
-          <div className="mobile-nav">
+          <div className="mobile-nav mobile-nav-open">
             <a href="#home" onClick={() => setMenuOpen(false)}>
               Home
             </a>
@@ -334,8 +537,14 @@ export default function App() {
             <a href="#services" onClick={() => setMenuOpen(false)}>
               Services
             </a>
+            <a href="#standards" onClick={() => setMenuOpen(false)}>
+              Standards
+            </a>
             <a href="#gallery" onClick={() => setMenuOpen(false)}>
               Gallery
+            </a>
+            <a href="#careers" onClick={() => setMenuOpen(false)}>
+              Careers
             </a>
             <a href="#contact" onClick={() => setMenuOpen(false)}>
               Contact
@@ -368,38 +577,51 @@ export default function App() {
         <section className="hero" id="home">
           <div className="hero-pattern" />
           <div className="wrap hero-grid">
-            <div className="hero-copy">
-              <div className="hero-brand-block">
-                <img src="/media/cuda-logo.png" alt="CUDA logo" />
-                <div>
-                  <p className="eyebrow">Who We Are</p>
-                  <h1>Comprehensive Security Solutions, Trusted & True.</h1>
-                </div>
-              </div>
-
+            <div className={`hero-copy hero-reveal${heroReady ? " is-visible" : ""}`}>
+              <p className="eyebrow">CUDA Security & Logistics Services Ltd</p>
+              <h1>Professional security and logistics support for businesses, institutions, residences, and events.</h1>
               <p className="hero-text">
-                CUDA Security & Logistics Services Ltd provides professional guarding, electronic security, executive protection,
-                K9 support, alarm response, courier services, and cash management for clients who need dependable service and clear supervision.
+                CUDA Security & Logistics Services Ltd delivers guarding, surveillance, executive protection, alarm response, K9 deployment, courier support, and cash management through disciplined personnel, structured supervision, and practical security planning.
               </p>
 
+              <div className="hero-trust-points">
+                <span>Professional guarding and patrol deployment</span>
+                <span>Technical surveys for CCTV and access control</span>
+                <span>Executive protection and specialist response support</span>
+              </div>
+
               <div className="button-row">
-                <a className="btn btn-secondary" href="#services">
-                  Explore Services
-                </a>
                 <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
                   Request a Quote
                 </button>
+                <a className="btn btn-secondary" href="#services">
+                  Explore Services
+                </a>
                 <button className="btn btn-secondary" onClick={() => setPricingOpen(true)}>
                   View Quotation
                 </button>
               </div>
+
+              <div className="hero-metrics">
+                {trustMetrics.map((item) => (
+                  <article className="metric-card" key={item.label}>
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </article>
+                ))}
+              </div>
             </div>
 
-            <div className="hero-intro-card">
-              <img src="/media/security-officer.png" alt="CUDA security officer" />
+            <div className={`hero-intro-card hero-reveal hero-reveal-delay${heroReady ? " is-visible" : ""}`}>
+              <div className="hero-media-shell">
+                <img src="/media/guard-team.jpg" alt="CUDA guards on coordinated deployment" />
+                <div className="hero-badge-card">
+                  <BrandLockup compact light />
+                </div>
+              </div>
               <div className="hero-intro-copy">
-                <strong>Professional security and logistics support for corporate, residential, institutional, and event environments.</strong>
-                <span>Based in Nairobi with response and support planning extending to Mombasa, Kisumu, and upcountry assignments.</span>
+                <strong>Based in Nairobi and ready to support corporate, residential, institutional, event, and executive assignments.</strong>
+                <span>Deployment planning can extend to Nairobi, Mombasa, Kisumu, and other locations depending on the service scope and client requirement.</span>
               </div>
             </div>
           </div>
@@ -409,14 +631,13 @@ export default function App() {
           <div className="wrap two-column">
             <div className="about-copy">
               <p className="eyebrow">About CUDA</p>
-              <h2>Security support built around discipline, integrity, innovation, and customer focus.</h2>
+              <h2>CUDA is built around professionalism, discipline, and dependable client service.</h2>
               <p className="section-copy">
-                CUDA is a provider of comprehensive security solutions dedicated to safeguarding individuals, businesses,
-                institutions, and assets through professionalism, operational readiness, and client-centered service delivery.
+                CUDA Security & Logistics Services Ltd serves clients who need reliable protection, responsible deployment, and practical coordination. The company combines manpower, supervision, and technical support to protect people, premises, assets, and daily operations.
               </p>
               <div className="about-note">
                 <strong>Mission</strong>
-                <span>Create secure environments for clients through responsive service, disciplined personnel, and practical security planning.</span>
+                <span>To create secure environments through responsive service, disciplined personnel, and practical security planning.</span>
               </div>
             </div>
 
@@ -434,8 +655,8 @@ export default function App() {
           <div className="wrap">
             <p className="eyebrow">Services</p>
             <div className="section-heading">
-              <h2>Core service areas organized for easier understanding and faster decision-making.</h2>
-              <p>CUDA combines manpower, specialist protection, and technical systems in one coordinated service structure.</p>
+              <h2>CUDA services are organized around guarding, technical security, executive support, and logistics assistance.</h2>
+              <p>Clients may engage the company for a single assignment or for a broader arrangement that combines manpower, response, and technical support.</p>
             </div>
 
             <div className="services-grid">
@@ -452,39 +673,54 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section gallery-section" id="gallery">
+        <section className="section specialist-section">
           <div className="wrap">
-            <p className="eyebrow">Gallery</p>
-            <div className="section-heading">
-              <h2>Selected profile visuals showing guarding, protection, communications, and specialist support.</h2>
-              <p>This section keeps the operational images together in one place instead of scattering them across every content block.</p>
-            </div>
+            <div className="specialist-panel">
+              <div className="specialist-copy">
+                <p className="eyebrow">Specialized Services</p>
+                <h2>Specialized services support assignments that require higher control, faster response, or more sensitive handling.</h2>
+                <p>
+                  CUDA also supports clients through K9 services, VIP movement support, alarm response, and accountable delivery operations where reliability, discretion, and supervision matter.
+                </p>
+                <ul className="feature-list">
+                  {specialistUnits.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className="gallery-grid">
-              {galleryItems.map((item) => (
-                <figure className="gallery-card" key={item.title}>
-                  <img src={item.image} alt={item.title} />
-                  <figcaption>{item.title}</figcaption>
-                </figure>
-              ))}
+              <div className="specialist-visual">
+                <img src="/media/bodyguard.jpg" alt="CUDA executive protection support" />
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section standards-section">
+        <section className="section trust-band-section">
+          <div className="wrap trust-band">
+            <div>
+              <p className="eyebrow">Why Choose CUDA</p>
+              <h2>Clients choose CUDA when they need disciplined personnel, clear communication, and dependable service.</h2>
+            </div>
+            <div className="trust-band-copy">
+              <p>CUDA combines integrity, readiness, supervision, and practical planning so clients can rely on stable support in both routine operations and sensitive assignments.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section standards-section" id="standards">
           <div className="wrap two-column">
             <article className="training-copy">
               <p className="eyebrow">Standards & Training</p>
-              <h2>Service quality is supported by training, supervision, discipline, and professional presentation.</h2>
+              <h2>Service standards are supported by guard readiness, supervision, turnout, and site-specific planning.</h2>
               <p>
-                CUDA's company profile highlights guard training, readiness, welfare practice, parade standards, and structured supervision.
-                These are part of the service standard clients experience on site.
+                CUDA maintains service quality through guard preparation, field discipline, supervisory follow-up, and attention to presentation while on assignment. Technical projects are guided by surveys so recommendations match the client site and risk profile.
               </p>
               <ul className="feature-list">
-                <li>Guard training aligned to professional security practice</li>
-                <li>Uniform presentation and field discipline on deployment</li>
-                <li>Supervision shaped around client site conditions</li>
-                <li>Technical surveys before quotation where required</li>
+                <li>Prepared personnel for guarding, patrol, and controlled-access assignments</li>
+                <li>Formal turnout, discipline, and visible professionalism on site</li>
+                <li>Supervision and follow-up aligned to client operations and reporting needs</li>
+                <li>Survey-based recommendations for CCTV, intruder alarms, and access control</li>
               </ul>
             </article>
 
@@ -494,12 +730,35 @@ export default function App() {
           </div>
         </section>
 
+        <section className="section gallery-section" id="gallery">
+          <div className="wrap">
+            <p className="eyebrow">Gallery</p>
+            <div className="section-heading">
+              <h2>Selected visuals from the company profile and service presentation.</h2>
+              <p>This gallery gives clients a clearer view of CUDA's guarding, specialist support, communications, and operational image without crowding the main sections.</p>
+            </div>
+
+            <div className="gallery-grid">
+              {galleryItems.map((item, index) => (
+                <figure
+                  className="gallery-card"
+                  key={item.title}
+                  style={{ transitionDelay: `${index * 90}ms` }}
+                >
+                  <img src={item.image} alt={item.title} />
+                  <figcaption>{item.title}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="section quote-link-section">
           <div className="wrap cta-panel">
             <div>
               <p className="eyebrow">Quotation Access</p>
-              <h2>Pricing and alarm response rates can be opened separately to keep the homepage cleaner.</h2>
-              <p>Use the quotation button to view current guarding rates and response pricing without cluttering the main page.</p>
+              <h2>Quotation rates can be opened separately so the homepage stays focused on service information.</h2>
+              <p>Review current guarding and response rates, then request site-specific pricing or technical survey support where needed.</p>
             </div>
             <div className="cta-actions">
               <button className="btn btn-primary" onClick={() => setPricingOpen(true)}>
@@ -511,16 +770,66 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <section className="section careers-section" id="careers">
+          <div className="wrap careers-panel">
+            <div className="careers-copy">
+              <p className="eyebrow">Careers</p>
+              <h2>Career opportunities are available through a separate application panel.</h2>
+              <p>
+                CUDA can receive applications for guarding, technical security, logistics support, and specialist roles through a separate careers panel.
+              </p>
+              <div className="careers-points">
+                <span>Security and patrol roles</span>
+                <span>Technical and systems positions</span>
+                <span>Executive and specialist support</span>
+              </div>
+            </div>
+
+            <div className="careers-card">
+              <strong>Careers Access</strong>
+              <p>
+                Open the careers panel to view requirements, role options, and the formal application form instead of placing all recruitment details directly on the homepage.
+              </p>
+              <div className="button-row">
+                <button className="btn btn-primary" onClick={() => setCareersOpen(true)}>
+                  Apply for a Position
+                </button>
+                <button className="btn btn-secondary" onClick={() => setCareersOpen(true)}>
+                  View Requirements
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section contact-preview-section">
+          <div className="wrap contact-preview">
+            <div className="contact-preview-copy">
+              <p className="eyebrow">Contact Preview</p>
+              <h2>Speak with CUDA about guarding, executive support, technical systems, or quotation planning.</h2>
+              <p>CUDA handles enquiries for guarding assignments, event security, executive protection, CCTV and alarm projects, courier support, and response planning from its Nairobi office.</p>
+            </div>
+
+            <div className="contact-preview-card">
+              <strong>CUDA Security & Logistics Services Ltd</strong>
+              <span>Nine Planets Apartment, Suite Plot 4, Kabarnet Gardens, Off Ngong Road, Nairobi</span>
+              <a href="mailto:info@cudasls.co.ke">info@cudasls.co.ke</a>
+              <a href="tel:+254725766457">+254 725 766 457</a>
+              <a href="tel:+254705150605">+254 705 150 605</a>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="footer" id="contact">
         <div className="wrap footer-grid">
           <div className="footer-brand">
-            <img src="/media/cuda-logo.png" alt="CUDA logo" />
+            <BrandLockup light />
             <p>
-              CUDA Security & Logistics Services Ltd delivers integrated protection, surveillance, response, and logistics support with a professional client-facing standard.
+              CUDA Security & Logistics Services Ltd provides guarding, surveillance, response, and logistics support with a professional standard of service.
             </p>
-            <div className="footer-badge">Professional protection and logistics support</div>
+            <div className="footer-badge">Professional protection, response, and logistics support</div>
           </div>
 
           <div>
@@ -556,6 +865,9 @@ export default function App() {
             <div className="footer-actions">
               <button className="btn btn-primary" onClick={() => setQuoteOpen(true)}>
                 Request a Quote
+              </button>
+              <button className="btn btn-secondary footer-whatsapp" onClick={() => setCareersOpen(true)}>
+                Careers
               </button>
               <button className="btn btn-secondary footer-whatsapp" onClick={() => setPricingOpen(true)}>
                 View Quotation
