@@ -585,7 +585,7 @@ export default function App() {
               </p>
 
               <div className="hero-mobile-media">
-                <img src="/media/security-officer.png" alt="CUDA security officer" />
+                <img src="/media/guard-team.jpg" alt="CUDA guards on coordinated deployment" />
               </div>
 
               <div className="hero-trust-points">
